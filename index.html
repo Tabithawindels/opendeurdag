@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hulpwijzer Lichaamsverzorging – CVO Groeipunt</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal: #009a9a;
+    --teal-dark: #007a7a;
+    --orange: #d95e00;
+    --orange-light: #f07020;
+    --light: #bcd8d9;
+    --lighter: #e8f4f4;
+    --white: #ffffff;
+    --gray: #555;
+    --gray-light: #f5f5f5;
+    --border: #dde8e8;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(0,154,154,0.10);
+    --shadow-hover: 0 6px 24px rgba(0,154,154,0.18);
+  }
+
+  body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: var(--white);
+    color: #333;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: var(--white);
+    padding: 36px 24px 32px;
+    text-align: center;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 15px;
+    opacity: 0.9;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* ── KEUZEHULP ── */
+  .keuzehulp-wrapper {
+    background: var(--lighter);
+    border-bottom: 2px solid var(--light);
+    padding: 28px 20px;
+  }
+  .keuzehulp-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .keuzehulp-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--teal-dark);
+  }
+  .keuzehulp-toggle .kh-icon {
+    background: var(--teal);
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .keuzehulp-toggle .kh-arrow {
+    margin-left: auto;
+    transition: transform .3s;
+    font-size: 18px;
+    color: var(--teal);
+  }
+  .keuzehulp-toggle.open .kh-arrow { transform: rotate(180deg); }
+
+  .keuzehulp-body {
+    display: none;
+    margin-top: 20px;
+  }
+  .keuzehulp-body.open { display: block; }
+
+  .kh-step { margin-bottom: 20px; }
+  .kh-step-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .kh-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .kh-chip {
+    padding: 8px 16px;
+    border-radius: 24px;
+    border: 2px solid var(--light);
+    background: var(--white);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    color: var(--gray);
+  }
+  .kh-chip:hover { border-color: var(--teal); color: var(--teal); }
+  .kh-chip.selected {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
+  }
+  .kh-result {
+    display: none;
+    background: var(--white);
+    border: 2px solid var(--teal);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-top: 8px;
+  }
+  .kh-result.show { display: block; }
+  .kh-result p { font-size: 14px; color: var(--gray); margin-bottom: 8px; }
+  .kh-result-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .kh-result-tag {
+    background: var(--orange);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .kh-result-tag:hover { background: var(--orange-light); }
+  .kh-reset {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: var(--teal);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* ── CATEGORY TABS ── */
+  .cat-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .cat-tab {
+    padding: 9px 18px;
+    border-radius: 24px;
+    border: 2px solid var(--border);
+    background: var(--white);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--gray);
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cat-tab:hover { border-color: var(--teal); color: var(--teal); }
+  .cat-tab.active {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
+  }
+
+  /* ── OPLEIDING CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .opl-card {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: all .25s;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .opl-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--teal);
+    transform: translateY(-2px);
+  }
+  .opl-card.highlighted { border-color: var(--orange); }
+
+  .card-header {
+    padding: 18px 20px 14px;
+    border-bottom: 2px solid var(--lighter);
+    background: var(--lighter);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-emoji {
+    font-size: 28px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .card-title-block {}
+  .card-cat {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: var(--teal);
+    margin-bottom: 3px;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #222;
+    line-height: 1.2;
+  }
+  .card-subtitle {
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  .card-body {
+    padding: 14px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .meta-pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--gray-light);
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: var(--gray);
+  }
+  .meta-pill.teal { background: var(--lighter); color: var(--teal-dark); }
+  .meta-pill.orange { background: #fff3ea; color: var(--orange); }
+
+  .card-prijs {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--teal);
+  }
+  .card-prijs span {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray);
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: auto;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    background: var(--lighter);
+    color: var(--teal-dark);
+  }
+  .tag.beginner { background: #e8f5e9; color: #388e3c; }
+  .tag.voorkennis { background: #fff3ea; color: var(--orange); }
+
+  .card-footer {
+    padding: 10px 20px 14px;
+    border-top: 2px solid var(--lighter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-footer-text {
+    font-size: 12px;
+    color: var(--gray);
+    font-style: italic;
+  }
+  .card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .card-btn:hover { background: var(--teal-dark); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--white);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 680px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    position: relative;
+  }
+
+  .modal-head {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: white;
+    padding: 24px 28px 20px;
+    border-radius: 16px 16px 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.35); }
+  .modal-cat {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: .8;
+    margin-bottom: 4px;
+  }
+  .modal-title {
+    font-size: 24px;
+    font-weight: 800;
+  }
+  .modal-subtitle {
+    font-size: 14px;
+    opacity: .85;
+    margin-top: 4px;
+  }
+
+  .modal-body { padding: 24px 28px 28px; }
+
+  .modal-section { margin-bottom: 24px; }
+  .modal-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: var(--teal);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--lighter);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } }
+
+  .info-item {
+    background: var(--gray-light);
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+  .info-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--gray);
+    margin-bottom: 2px;
+  }
+  .info-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+  }
+  .info-item.prijs-item { background: var(--lighter); }
+  .info-item.prijs-item .info-value { color: var(--teal-dark); font-size: 18px; }
+
+  /* modules list */
+  .modules-list { display: flex; flex-direction: column; gap: 12px; }
+  .module-item {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .module-header {
+    background: var(--lighter);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+  .module-header:hover { background: var(--light); }
+  .module-num {
+    background: var(--teal);
+    color: white;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+  .module-name { font-weight: 700; font-size: 14px; color: #222; flex: 1; }
+  .module-price {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal-dark);
+    margin-right: 8px;
+  }
+  .module-arrow {
+    color: var(--teal);
+    font-size: 16px;
+    transition: transform .25s;
+  }
+  .module-arrow.open { transform: rotate(180deg); }
+
+  .module-body {
+    display: none;
+    padding: 14px 16px;
+    background: white;
+  }
+  .module-body.open { display: block; }
+  .module-inhoud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .module-tag {
+    background: var(--lighter);
+    color: var(--teal-dark);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .module-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--gray);
+  }
+  .module-meta-item {
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  /* tip box */
+  .tip-box {
+    background: #fff3ea;
+    border-left: 4px solid var(--orange);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #555;
+    margin-top: 4px;
+  }
+  .tip-box strong { color: var(--orange); }
+
+  /* info note */
+  .info-note {
+    background: var(--lighter);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* traject steps */
+  .traject-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .traject-step {
+    display: flex;
+    gap: 14px;
+    position: relative;
+  }
+  .traject-step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 13px;
+    top: 28px;
+    bottom: -10px;
+    width: 2px;
+    background: var(--light);
+  }
+  .step-dot {
+    width: 28px; height: 28px;
+    background: var(--teal);
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+  .step-content {
+    background: var(--gray-light);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    flex: 1;
+  }
+  .step-year {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--teal);
+    letter-spacing: .5px;
+  }
+  .step-modules {
+    font-size: 13px;
+    font-weight: 600;
+    color: #222;
+    margin-top: 2px;
+  }
+  .step-info {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  /* general good-to-know */
+  .gtknow {
+    background: var(--lighter);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-top: 36px;
+    border: 2px solid var(--light);
+  }
+  .gtknow h3 {
+    color: var(--teal-dark);
+    font-size: 16px;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .gtknow ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .gtknow ul li {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--gray);
+  }
+  .gtknow ul li::before {
+    content: '✓';
+    color: var(--teal);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* empty state */
+  .empty-state {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--gray);
+    display: none;
+  }
+  .empty-state.show { display: block; }
+  .empty-state .es-icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state p { font-size: 15px; }
+
+  /* responsive */
+  @media (max-width: 640px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .modal-body { padding: 16px 18px 24px; }
+    .modal-head { padding: 20px 18px 16px; }
+    .info-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-badge">Opendeurdag 2026</div>
+  <h1>Ontdek jouw opleiding<br>Lichaamsverzorging</h1>
+  <p>CVO Groeipunt – Campus Gent &nbsp;|&nbsp; Avondonderwijs voor volwassenen</p>
+</header>
+
+<!-- KEUZEHULP -->
+<div class="keuzehulp-wrapper">
+  <div class="keuzehulp-inner">
+    <div class="keuzehulp-toggle" id="khToggle" onclick="toggleKH()">
+      <div class="kh-icon">🎯</div>
+      <span>Weet je nog niet wat je wil studeren? Gebruik de keuzehulp!</span>
+      <span class="kh-arrow">▼</span>
+    </div>
+    <div class="keuzehulp-body" id="khBody">
+      <div class="kh-step">
+        <span class="kh-step-label">Vraag 1 – Wat spreekt jou het meest aan?</span>
+        <div class="kh-chips" id="kh1">
+          <button class="kh-chip" onclick="selectKH(1,'nagels')" data-val="nagels">💅 Nagels</button>
+          <button class="kh-chip" onclick="selectKH(1,'voeten')" data-val="voeten">🦶 Voeten</button>
+          <button class="kh-chip" onclick="selectKH(1,'gelaat')" data-val="gelaat">✨ Gelaat &amp; Huid</button>
+          <button class="kh-chip" onclick="selectKH(1,'massage')" data-val="massage">💆 Massage</button>
+          <button class="kh-chip" onclick="selectKH(1,'makeup')" data-val="makeup">💄 Make-up &amp; Visagie</button>
+          <button class="kh-chip" onclick="selectKH(1,'grime')" data-val="grime">🎭 Grime</button>
+          <button class="kh-chip" onclick="selectKH(1,'haar')" data-val="haar">✂️ Haar</button>
+        </div>
+      </div>
+      <div class="kh-step">
+        <span class="kh-step-label">Vraag 2 – Hoe omschrijf je jezelf?</span>
+        <div class="kh-chips" id="kh2">
+          <button class="kh-chip" onclick="selectKH(2,'beginner')" data-val="beginner">🌱 Totale beginner</button>
+          <button class="kh-chip" onclick="selectKH(2,'basis')" data-val="basis">📚 Ik heb al wat basiskennis</button>
+          <button class="kh-chip" onclick="selectKH(2,'pro')" data-val="pro">⭐ Ik wil mij verdiepen / specialiseren</button>
+        </div>
+      </div>
+      <div class="kh-step">
+        <span class="kh-step-label">Vraag 3 – Hoeveel avonden per week kan je les volgen?</span>
+        <div class="kh-chips" id="kh3">
+          <button class="kh-chip" onclick="selectKH(3,'1')" data-val="1">1 avond/week</button>
+          <button class="kh-chip" onclick="selectKH(3,'2')" data-val="2">2 avonden/week</button>
+          <button class="kh-chip" onclick="selectKH(3,'2+')" data-val="2+">2-3 avonden/week</button>
+        </div>
+      </div>
+      <div class="kh-result" id="khResult">
+        <p>🎉 Op basis van jouw antwoorden raden wij deze opleidingen aan:</p>
+        <div class="kh-result-tags" id="khResultTags"></div>
+        <button class="kh-reset" onclick="resetKH()">Opnieuw beginnen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- CATEGORY TABS -->
+  <div class="cat-tabs" id="catTabs">
+    <button class="cat-tab active" onclick="filterCat('all')" data-cat="all">📋 Alle opleidingen</button>
+    <button class="cat-tab" onclick="filterCat('nagels')" data-cat="nagels">💅 Nagels</button>
+    <button class="cat-tab" onclick="filterCat('voeten')" data-cat="voeten">🦶 Voeten</button>
+    <button class="cat-tab" onclick="filterCat('gelaat')" data-cat="gelaat">✨ Gelaat &amp; Huid</button>
+    <button class="cat-tab" onclick="filterCat('massage')" data-cat="massage">💆 Massage</button>
+    <button class="cat-tab" onclick="filterCat('makeup')" data-cat="makeup">💄 Make-up &amp; Visagie</button>
+    <button class="cat-tab" onclick="filterCat('grime')" data-cat="grime">🎭 Grime</button>
+    <button class="cat-tab" onclick="filterCat('haar')" data-cat="haar">✂️ Haar</button>
+  </div>
+
+  <!-- CARDS GRID -->
+  <div class="cards-grid" id="cardsGrid"></div>
+  <div class="empty-state" id="emptyState">
+    <div class="es-icon">🔍</div>
+    <p>Geen opleidingen gevonden voor deze selectie.</p>
+  </div>
+
+  <!-- GOOD TO KNOW -->
+  <div class="gtknow">
+    <h3>📌 Goed om te weten</h3>
+    <ul>
+      <li>Alle lessen vinden plaats van <strong>18u30 tot 22u00</strong> (avondonderwijs).</li>
+      <li>Het schoolgeld (voor verbruiksproducten) staat los van het inschrijvingsgeld en wordt apart betaald.</li>
+      <li>Startpakketten worden op de eerste les voorgesteld – niets op voorhand aankopen nodig.</li>
+      <li>Mogelijks kom je in aanmerking voor <strong>vrijstelling inschrijvingsgeld</strong> (werkzoekenden, leefloon, arbeidsongeschiktheid…).</li>
+      <li>Meer info of inschrijven via coördinator: <strong>eline.deblauwe@groeipunt.be</strong></li>
+    </ul>
+  </div>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <div class="modal-head">
+      <div class="modal-cat" id="mCat"></div>
+      <div class="modal-title" id="mTitle"></div>
+      <div class="modal-subtitle" id="mSubtitle"></div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="mBody"></div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────────────────────
+const OPLEIDINGEN = [
+
+  // ── NAGELS ──────────────────────────────────────────────────
+  {
+    id: 'nagelstylist',
+    cat: 'nagels',
+    emoji: '💅',
+    naam: 'Nagelstylist',
+    certificaat: 'Certificaat Nagelstylist',
+    omschrijving: 'Van handverzorging tot gel- en acrylnagels en freestechnieken: een compleet parcours voor wie professioneel met nagels aan de slag wil.',
+    lesdagen: 'Optie 1: Dinsdag + Woensdag (half semester) · Optie 2: Donderdag (1 schooljaar)',
+    tijdstip: '18u30 – 22u00',
+    duur: '2 avonden/week – half semester  OF  1 avond/week – volledig schooljaar',
+    afstand: '30% afstandsonderwijs',
+    prijs_totaal: '€ 495',
+    schoolgeld_totaal: '+ schoolgeld per module',
+    startpakket: 'Vrijblijvend startpakket per module',
+    voorkennis: 'Geen – start met Nagelstyling 1',
+    avonden: 1,
+    avendenLabel: '1 avond/week  OF  2 avonden/week',
+    tags: ['beginner', 'Startmodule beschikbaar'],
+    modules: [
+      {
+        naam: 'Nagelstyling 1',
+        num: 1,
+        lesdagen: 'Di + Wo (2 avonden) of Donderdag (1 avond)',
+        inhoud: ['Handverzorging', 'Voorbereidende technieken kunstnagels'],
+        prijs: '€ 135',
+        schoolgeld: '€ 18',
+        startpakket: '~€ 100 (vrijblijvend)',
+        voorkennis: 'Geen – dit is de startmodule'
+      },
+      {
+        naam: 'Nagelstyling 2',
+        num: 2,
+        lesdagen: 'Di + Wo (2 avonden) of Donderdag (1 avond)',
+        inhoud: ['Laktechnieken', 'Verfraaiingen'],
+        prijs: '€ 180',
+        schoolgeld: '€ 35',
+        startpakket: '~€ 350 (vrijblijvend)',
+        voorkennis: 'Nagelstyling 1'
+      },
+      {
+        naam: 'Nagelstyling 3',
+        num: 3,
+        lesdagen: 'Di + Wo (2 avonden) of Donderdag (1 avond)',
+        inhoud: ['Freestechnieken'],
+        prijs: '€ 180',
+        schoolgeld: '€ 35',
+        startpakket: 'Geen',
+        voorkennis: 'Nagelstyling 2'
+      }
+    ],
+    tip: 'Kies zelf je tempo: 2 avonden/week op dinsdag + woensdag (half semester) of 1 avond/week op donderdag (volledig schooljaar). De 3 modules samen = volledige opleiding Nagelstylist voor € 495.',
+    extra: null
+  },
+
+  // ── VOETEN ──────────────────────────────────────────────────
+  {
+    id: 'voetverzorger',
+    cat: 'voeten',
+    emoji: '🦶',
+    naam: 'Voetverzorger',
+    certificaat: 'Certificaat Voetverzorger',
+    omschrijving: 'Leer manuele en technische voetverzorging, inclusief freestechnieken, verbandtechnieken en wellness voor de voet.',
+    lesdagen: 'Dinsdag + Woensdag',
+    tijdstip: '18u30 – 22u00',
+    duur: '1 schooljaar',
+    afstand: '25% afstandsonderwijs',
+    prijs_totaal: '€ 630',
+    schoolgeld_totaal: '+ schoolgeld',
+    startpakket: 'Basismateriaal verplicht aan te kopen',
+    voorkennis: 'Geen – start met Voetverzorging 1',
+    avonden: 2,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Voetverzorging 1',
+        num: 1,
+        lesdagen: 'Dinsdag + Woensdag (2 avonden/week)',
+        inhoud: ['Anatomie van de voet', 'Manuele esthetische voetverzorging', 'Freestechnieken voetverzorging'],
+        prijs: '€ 495',
+        schoolgeld: '€ 55',
+        startpakket: 'Basismateriaal (verplicht)',
+        voorkennis: 'Geen'
+      },
+      {
+        naam: 'Voetverzorging 2',
+        num: 2,
+        lesdagen: 'Woensdag (1 avond/week)',
+        inhoud: ['Verbandtechnieken', 'Wellness in de voetverzorging'],
+        prijs: '€ 135',
+        schoolgeld: '€ 5',
+        startpakket: 'Geen extra',
+        voorkennis: 'Geslaagd voor Voetverzorging 1 (verplicht)'
+      }
+    ],
+    tip: null,
+    extra: null
+  },
+
+  // ── GELAAT & HUID ────────────────────────────────────────────
+
+  // ── MASSAGE ─────────────────────────────────────────────────
+  {
+    id: 'masseur',
+    cat: 'massage',
+    emoji: '💆',
+    naam: 'Masseur',
+    certificaat: 'Certificaat Masseur',
+    omschrijving: 'Leer klassieke lichaamsmassage en basis wellnesstechnieken. De theorie volg je volledig via afstandsonderwijs; de praktijk op school.',
+    lesdagen: 'Maandag + Donderdag',
+    tijdstip: '18u30 – 22u00',
+    duur: '1 schooljaar',
+    afstand: 'Theorie volledig via afstandsonderwijs',
+    prijs_totaal: '€ 720',
+    schoolgeld_totaal: '+ schoolgeld',
+    startpakket: null,
+    voorkennis: 'Geen',
+    avonden: 2,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Masseur (basis)',
+        num: 1,
+        lesdagen: 'Donderdag (1 avond/week)',
+        inhoud: ['Klassieke lichaamsmassage'],
+        prijs: '€ 360',
+        schoolgeld: '€ 19',
+        startpakket: null,
+        voorkennis: 'Geen'
+      },
+      {
+        naam: 'Masseur specialisatie – Wellness',
+        num: 2,
+        lesdagen: 'Maandag + Donderdag (2 avonden/week)',
+        inhoud: ['Wellness behandelingen'],
+        prijs: '€ 90',
+        schoolgeld: '€ 62',
+        startpakket: null,
+        voorkennis: 'Masseur basis'
+      },
+      {
+        naam: 'Masseur specialisatie – Specifieke lichaamsbehandelingen',
+        num: 3,
+        lesdagen: 'Maandag + Donderdag (2 avonden/week)',
+        inhoud: ['Specifieke lichaamsmassage en -behandelingen'],
+        prijs: '€ 270',
+        schoolgeld: '€ 27',
+        startpakket: null,
+        voorkennis: 'Masseur basis'
+      }
+    ],
+    tip: 'Je kan na Masseur basis kiezen welke specialisatie(s) je wil volgen.',
+    extra: null
+  },
+
+  // ── MAKE-UP & VISAGIE ────────────────────────────────────────
+  {
+    id: 'makeup',
+    cat: 'makeup',
+    emoji: '💄',
+    naam: 'Make-up',
+    certificaat: 'Deelcertificaat Make-up',
+    omschrijving: 'Beheers alle essentiële make-uptechnieken van basismake-up tot correctieve make-up en kleurenleer. Kan ook als onderdeel van de opleiding Schoonheidsspecialist.',
+    lesdagen: 'Wisselend (1 avond/week)',
+    tijdstip: '18u30 – 22u00',
+    duur: '1 semester',
+    afstand: '20% afstandsonderwijs',
+    prijs_totaal: '€ 225',
+    schoolgeld_totaal: '+ € 25 schoolgeld',
+    startpakket: 'Eigen materiaal',
+    voorkennis: 'Geen',
+    avonden: 1,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Make-up',
+        num: 1,
+        lesdagen: 'Maandag of Woensdag (keuze bij inschrijving)',
+        inhoud: [
+          'Basisopmaak: concealer, foundation, contour & highlight, blush',
+          'Oogopmaak: wenkbrauwen bijtekenen, oogschaduw, eyeliner, mascara',
+          'Mondopmaak',
+          'Make-up voor de rijpere huid',
+          'Correctieve make-up',
+          'Smokey eyes & combinatietechnieken',
+          'Kleurenleer'
+        ],
+        prijs: '€ 225',
+        schoolgeld: '€ 25',
+        startpakket: 'Eigen materiaal',
+        voorkennis: 'Geen'
+      }
+    ],
+    tip: null,
+    extra: null
+  },
+  {
+    id: 'visagie',
+    cat: 'makeup',
+    emoji: '🎨',
+    naam: 'Visagie',
+    certificaat: 'Certificaat Visagie',
+    omschrijving: 'Bouw je make-upkennis uit naar professioneel visagieniveau: retro, experimenteel, studio, catwalk en editorial.',
+    lesdagen: '1 avond/week',
+    tijdstip: '18u30 – 22u00',
+    duur: '2 semesters (2 modules, vrije volgorde)',
+    afstand: '20% afstandsonderwijs per module',
+    prijs_totaal: '€ 360',
+    schoolgeld_totaal: '+ schoolgeld',
+    startpakket: 'Eigen materiaal',
+    voorkennis: 'Make-up (verplicht)',
+    avonden: 1,
+    tags: ['voorkennis'],
+    modules: [
+      {
+        naam: 'Visagie – Retro / Experimenteel',
+        num: 1,
+        lesdagen: 'Dinsdagavond',
+        inhoud: ['Retro make-up technieken', 'Experimentele visagie'],
+        prijs: '€ 180',
+        schoolgeld: 'Zie inschrijving',
+        startpakket: 'Eigen materiaal',
+        voorkennis: 'Geslaagd voor Make-up'
+      },
+      {
+        naam: 'Visagie – Studio / Catwalk / Editorial',
+        num: 2,
+        lesdagen: 'Dinsdagavond',
+        inhoud: ['Studio make-up', 'Catwalk visagie', 'Editorial make-up'],
+        prijs: '€ 180',
+        schoolgeld: 'Zie inschrijving',
+        startpakket: 'Eigen materiaal',
+        voorkennis: 'Geslaagd voor Make-up'
+      }
+    ],
+    tip: 'Je kan de twee modules in om het even welke volgorde volgen, als je Make-up hebt gedaan!',
+    extra: null
+  },
+
+  // ── GRIME ────────────────────────────────────────────────────
+  {
+    id: 'basisgrime',
+    cat: 'grime',
+    emoji: '🎭',
+    naam: 'Basisgrime',
+    certificaat: 'Deelcertificaat Basisgrime',
+    omschrijving: 'Leer de basisprincipes van grime: creatie van een karakter, verouderingstechnieken en ontwerptekening. Geen voorkennis vereist.',
+    lesdagen: '1 avond/week',
+    tijdstip: '18u30 – 22u00',
+    duur: '1 semester',
+    afstand: null,
+    prijs_totaal: '€ 135',
+    schoolgeld_totaal: '+ € 22 schoolgeld',
+    startpakket: '~€ 100 basismateriaal',
+    voorkennis: 'Geen',
+    avonden: 1,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Basisgrime',
+        num: 1,
+        lesdagen: 'Maandagavond – 1 semester',
+        inhoud: [
+          'Creatie van een karakter',
+          'Verouderingstechnieken',
+          'Verouderen van de handen',
+          'Maken van een ontwerptekening',
+          'Wenkbrauwen wegwerken'
+        ],
+        prijs: '€ 135',
+        schoolgeld: '€ 22',
+        startpakket: '~€ 100',
+        voorkennis: 'Geen – startmodule'
+      }
+    ],
+    tip: null,
+    extra: null
+  },
+  {
+    id: 'theatergrime',
+    cat: 'grime',
+    emoji: '🎪',
+    naam: 'Theatergrime',
+    certificaat: 'Deelcertificaat Theatergrime',
+    omschrijving: 'Verdiep je in theatergrime: protheses maken, eigen karakter ontwerpen en stijlperiodes.',
+    lesdagen: '1 avond/week',
+    tijdstip: '18u30 – 22u00',
+    duur: '1 semester',
+    afstand: null,
+    prijs_totaal: '€ 180',
+    schoolgeld_totaal: '+ € 22 schoolgeld',
+    startpakket: '~€ 80 basispakket',
+    voorkennis: 'Basisgrime',
+    avonden: 1,
+    tags: ['voorkennis'],
+    modules: [
+      {
+        naam: 'Theatergrime',
+        num: 1,
+        lesdagen: 'Maandagavond – 1 semester',
+        inhoud: [
+          'Prothese maken en aanbrengen',
+          'Ontwerptekening maken',
+          'Eigen karakter ontwerpen',
+          'Stijlperiodes kennen',
+          'Wenkbrauwen wegwerken'
+        ],
+        prijs: '€ 180',
+        schoolgeld: '€ 22',
+        startpakket: '~€ 80',
+        voorkennis: 'Basisgrime'
+      }
+    ],
+    tip: null,
+    extra: null
+  },
+  {
+    id: '3dgrime',
+    cat: 'grime',
+    emoji: '🧪',
+    naam: '3D Grime (Speciale technieken)',
+    certificaat: 'Deelcertificaten Speciale Grimeer­technieken',
+    omschrijving: 'Gevorderde grimeer­technieken: maskers maken, special FX, realistische wonden. Verdeeld in drie ateliers.',
+    lesdagen: '1 avond/week',
+    tijdstip: '18u30 – 22u00',
+    duur: 'Wisselend per module (5–19 weken)',
+    afstand: null,
+    prijs_totaal: 'Zie per module',
+    schoolgeld_totaal: '+ schoolgeld',
+    startpakket: 'Startpakket €300–€400 (verplicht)',
+    voorkennis: 'Basisgrime',
+    avonden: 1,
+    tags: ['voorkennis'],
+    modules: [
+      {
+        naam: '3D Grime – Maskers',
+        num: 1,
+        lesdagen: 'Dinsdagavond – wisselend 5–19 weken',
+        inhoud: ['Nieuwe mal maken op boetseerwerk', 'Masker met silicone, koud schuim…'],
+        prijs: 'zie inschrijving',
+        schoolgeld: '€ 10',
+        startpakket: '€ 300–400 (verplicht)',
+        voorkennis: 'Basisgrime'
+      },
+      {
+        naam: 'Special FX Atelier – Wonden',
+        num: 2,
+        lesdagen: 'Dinsdagavond – wisselend 5–19 weken',
+        inhoud: ['Realistische wonden', 'Platte mal maken', 'Werken naar thema'],
+        prijs: 'zie inschrijving',
+        schoolgeld: '€ 60',
+        startpakket: 'Zie module',
+        voorkennis: 'Basisgrime'
+      }
+    ],
+    tip: null,
+    extra: null
+  },
+
+  // ── KINDERGRIME & FACEPAINTING ────────────────────────────────
+  {
+    id: 'kindergrime',
+    cat: 'grime',
+    emoji: '🦋',
+    naam: 'Kindergrime',
+    certificaat: 'Deelcertificaat Kindergrime',
+    omschrijving: 'Leer gezichten schminken voor kinderen: licht en schaduw, kleurovergangen, glitters, vlinders en feeën. Leuk en toegankelijk voor beginners!',
+    lesdagen: '1 avond/week',
+    tijdstip: '18u30 – 22u00',
+    duur: 'Half semester',
+    afstand: null,
+    prijs_totaal: '€ 90',
+    schoolgeld_totaal: '+ € 6 schoolgeld',
+    startpakket: '~€ 160 facepaint pakket',
+    voorkennis: 'Geen',
+    avonden: 1,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Kindergrime',
+        num: 1,
+        lesdagen: 'Donderdagavond – 1e halfjaar',
+        inhoud: [
+          'Licht en schaduw technieken',
+          'Kleurenleer & teardrops, tijgerlijnen, one stroke',
+          'Kleurovergangen',
+          'Werken met glitters',
+          'Vlinders, bloemen, katachtigen, jongens, feeën',
+          'Gem clustering'
+        ],
+        prijs: '€ 90',
+        schoolgeld: '€ 6',
+        startpakket: '~€ 160 facepaint pakket',
+        voorkennis: 'Geen'
+      }
+    ],
+    tip: null,
+    extra: null
+  },
+  {
+    id: 'facepainting',
+    cat: 'grime',
+    emoji: '🖌️',
+    naam: 'Facepainting & Bodypainting',
+    certificaat: 'Deelcertificaten Facepainting / Bodypainting',
+    omschrijving: 'Van facepainting (halloween, pop-art, fantasy…) tot volledige bodypainting: airbrush, sjablonen en thematisch werken.',
+    lesdagen: '1 avond/week',
+    tijdstip: '18u30 – 22u00',
+    duur: 'Facepainting: half semester · Bodypainting: 1 schooljaar',
+    afstand: null,
+    prijs_totaal: '€ 90 per module',
+    schoolgeld_totaal: '+ schoolgeld',
+    startpakket: '~€ 160 per module',
+    voorkennis: 'Geen',
+    avonden: 1,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Facepainting',
+        num: 1,
+        lesdagen: 'Donderdagavond – half semester',
+        inhoud: [
+          'Basistechnieken & licht en schaduw',
+          'Vet- en waterschmink, teardrops, swirllines',
+          'Halloween thema',
+          'Omgang met klanten',
+          'Kleurovergangen & ontwerpen',
+          'Thema\'s: pop-art, katachtigen, fantasy, alien…'
+        ],
+        prijs: '€ 90',
+        schoolgeld: '€ 8',
+        startpakket: '~€ 160',
+        voorkennis: 'Geen'
+      },
+      {
+        naam: 'Bodypainting',
+        num: 2,
+        lesdagen: 'Donderdagavond – volledig schooljaar',
+        inhoud: [
+          'Bellypainting & airbrush',
+          'Sjablonen & licht en schaduw oefeningen',
+          'Kleurovergangen & full bodypaint',
+          'Object bodypaint',
+          'Thema\'s: steampunk, bionic, torso, wegvallen achtergrond…'
+        ],
+        prijs: '€ 180',
+        schoolgeld: '€ 41',
+        startpakket: 'Grotere penselen ~€ 40',
+        voorkennis: 'Geen (aanbevolen: Facepainting)'
+      }
+    ],
+    tip: null,
+    extra: null
+  },
+
+  // ── HAIRSTYLING ────────────────────────────────────────────────
+  {
+    id: 'hairstyling',
+    cat: 'makeup',
+    emoji: '💍',
+    naam: 'Hairstyling',
+    certificaat: 'Deelcertificaat Hairstyling',
+    omschrijving: 'Leer professionele opsteekkapsels en gevorderde haarstylingtechnieken.',
+    lesdagen: '1 avond/week',
+    tijdstip: '18u30 – 22u00',
+    duur: '2 semesters (2 modules)',
+    afstand: null,
+    prijs_totaal: '€ 360',
+    schoolgeld_totaal: '+ schoolgeld',
+    startpakket: 'Beperkt materiaal',
+    voorkennis: 'Geen voor Hairstyling 1',
+    avonden: 1,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Hairstyling 1 – Opsteekkapsels',
+        num: 1,
+        lesdagen: 'Woensdagavond – 1e half semester',
+        inhoud: [
+          'Haar voorbereiden op opsteekkapsel',
+          'Basistechnieken: 3-vlecht, 4-vlecht, invlecht, opvlecht',
+          'Torsen, lussen, knopen, weven, chignon',
+          'Verwerken van haardelen',
+          'Gebruik van volumemateriaal',
+          'Werken naar foto / wens klant'
+        ],
+        prijs: '€ 180',
+        schoolgeld: '€ 19,50',
+        startpakket: '~€ 20 materiaal',
+        voorkennis: 'Geen'
+      },
+      {
+        naam: 'Hairstyling 2 – Gevorderde Opsteekkapsels',
+        num: 2,
+        lesdagen: 'Woensdagavond – 2e half semester (volgt op HS1)',
+        inhoud: ['Gevorderde opsteekkapseltechnieken'],
+        prijs: '€ 180',
+        schoolgeld: 'Zie inschrijving',
+        startpakket: null,
+        voorkennis: 'Geslaagd voor Hairstyling 1'
+      }
+    ],
+    tip: null,
+    extra: null
+  },
+
+  // ── HAAR: KAPPER ─────────────────────────────────────────────
+  {
+    id: 'kapper-start',
+    cat: 'haar',
+    emoji: '✂️',
+    naam: 'Kapper – Startmodules',
+    certificaat: 'Op weg naar certificaat Kapper',
+    omschrijving: 'Begin je kapperstraject met de twee startmodules: Tijdelijke Omvormingen & Haarverzorging en Basissnitten. Samen vormen ze een stevig eerste jaar.',
+    lesdagen: 'TOM: Dinsdag · Basissnitten: Maandag of Donderdag',
+    tijdstip: '18u30 – 22u00',
+    duur: 'TOM: 1 avond/week – half semester · Basissnitten: 1 avond/week – 1 schooljaar',
+    afstand: '50% afstandsonderwijs voor TOM',
+    prijs_totaal: '€ 450 (ipv € 720 bij combinatie!)',
+    schoolgeld_totaal: '+ schoolgeld',
+    startpakket: 'TOM: ~€ 190 | Snitten: ~€ 255–335',
+    voorkennis: 'Geen',
+    avonden: 2,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Tijdelijke Omvormingen & Haarverzorging (TOM)',
+        num: 1,
+        inhoud: [
+          'Ontvangst en installeren van klanten',
+          'Materiaal en benodigdheden',
+          'Wassen en verzorgen van het haar',
+          'Soorten haar',
+          'Verschillende brushingtechnieken',
+          'Watergolf'
+        ],
+        prijs: '€ 360',
+        schoolgeld: '€ 25',
+        startpakket: '~€ 190',
+        voorkennis: 'Geen – startmodule'
+      },
+      {
+        naam: 'Basissnitten',
+        num: 2,
+        inhoud: [
+          'Juist hanteren van kam en schaar',
+          'Verdelingen maken i.f.v. de snit',
+          '4 basissnitten dames',
+          'Basissnitten heren',
+          'Werken op oefenhoofden en modellen'
+        ],
+        prijs: '€ 360',
+        schoolgeld: '€ 3',
+        startpakket: '~€ 255–335 (minder als je TOM doet)',
+        voorkennis: 'Aanbevolen: TOM gedaan hebben'
+      }
+    ],
+    tip: 'Combineer TOM + Basissnitten = je betaalt slechts € 450 inschrijvingsgeld (mooie korting!). Na het eerste jaar kies je vrij welke vervolgmodules je wil volgen.',
+    extra: null
+  },
+  {
+    id: 'kapper-vervolg',
+    cat: 'haar',
+    emoji: '🎓',
+    naam: 'Kapper – Vervolgmodules',
+    certificaat: 'Certificaat Kapper',
+    omschrijving: 'Na je startmodules verdiep je je in kleuren, ontkleuren, opsteekkapsels, combinatiesnitten, blijvende omvormingen en het afstudeertraject salonwerk.',
+    lesdagen: 'Dinsdag / Woensdag / Donderdag (wisselend)',
+    tijdstip: '18u30 – 22u00',
+    duur: '2–3 schooljaren (afhankelijk van tempo)',
+    afstand: null,
+    prijs_totaal: 'Zie per module',
+    schoolgeld_totaal: '+ schoolgeld per module',
+    startpakket: 'Wisselend per module',
+    voorkennis: 'Startmodules Kapper',
+    avonden: 2,
+    tags: ['voorkennis'],
+    traject: [
+      { jaar: '2de schooljaar', modules: 'Combinatiesnitten Heren · Kleuren · Ontkleuren', info: '2–3 avonden/week' },
+      { jaar: '3de schooljaar', modules: 'Combinatiesnitten Dames · Opsteekkapsels · Gelegenheidskapsels · Blijvende Omvormingen · Basis Make-up & Handverzorging · Onthaal Klanten Kapsalon', info: '2–3 avonden/week' },
+      { jaar: '4de schooljaar', modules: 'Salonwerk (afstudeermodule)', info: '2 avonden/semester of 1 avond/jaar' }
+    ],
+    modules: [
+      {
+        naam: 'Kleuren',
+        num: 1,
+        lesdagen: 'Maandagavond',
+        inhoud: ['Vluchtige kleuring', 'Toon op toon', 'Oxidatiekleuring', 'Grijsdekkend kleuren', 'Correctief kleuren'],
+        prijs: '€ 360',
+        schoolgeld: '€ 28',
+        startpakket: '~€ 25 materiaal',
+        voorkennis: 'Basissnitten (aanbevolen)'
+      },
+      {
+        naam: 'Ontkleuren',
+        num: 2,
+        lesdagen: 'Niet ingericht komend schooljaar',
+        inhoud: ['Balayages', 'Mechen', 'Lokken', 'Gradatiekleuringen', 'Volledige ontkleuring'],
+        prijs: '€ 180',
+        schoolgeld: '€ 28',
+        startpakket: '~€ 51 materiaal',
+        voorkennis: 'Aanbevolen: Kleuren',
+        opmerking: 'Niet ingericht in schooljaar 26-27'
+      },
+      {
+        naam: 'Opsteekkapsels / Hairstyling 1 (Kapper)',
+        num: 3,
+        lesdagen: 'Woensdagavond',
+        inhoud: ['Alle basistechnieken opsteekkapsel', 'Gelegenheidskapsels', 'Werken op oefenhoofden & modellen'],
+        prijs: '€ 180',
+        schoolgeld: '€ 19,50',
+        startpakket: '~€ 20 materiaal',
+        voorkennis: 'Basissnitten'
+      },
+      {
+        naam: 'Combinatiesnitten Heren',
+        num: 4,
+        lesdagen: 'Woensdagavond',
+        inhoud: ['Gevorderde herensnitten en combinatietechnieken'],
+        prijs: '€ 360',
+        schoolgeld: '€ 33',
+        startpakket: null,
+        voorkennis: 'Basissnitten'
+      },
+      {
+        naam: 'Combinatiesnitten Dames',
+        num: 5,
+        lesdagen: 'Dinsdagavond',
+        inhoud: ['Gevorderde damessnitten en combinatietechnieken'],
+        prijs: '€ 360',
+        schoolgeld: '€ 20',
+        startpakket: null,
+        voorkennis: 'Basissnitten'
+      },
+      {
+        naam: 'Blijvende Omvormingen',
+        num: 6,
+        lesdagen: 'Dinsdag + Donderdag (2 avonden/week)',
+        inhoud: ['Klassieke en moderne permanenttechnieken', 'Basis make-up', 'Basis manicure'],
+        prijs: '€ 360',
+        schoolgeld: '€ 15,50',
+        startpakket: 'Materiaal voor permanent',
+        voorkennis: 'Basissnitten'
+      },
+      {
+        naam: 'Salonwerk (Afstudeermodule)',
+        num: 7,
+        lesdagen: 'Niet ingericht komend schooljaar',
+        inhoud: ['Praktijkgericht werken in saloncontext'],
+        prijs: '€ 360',
+        schoolgeld: '€ 28',
+        startpakket: null,
+        voorkennis: 'Alle vorige kappermodules',
+        opmerking: 'Niet ingericht in schooljaar 26-27'
+      }
+    ],
+    tip: 'Na het eerste jaar ben je vrij om te schakelen naar 1, 2 of 3 avonden per week. Wij raden 2 avonden/week aan.',
+    extra: 'Voor inschrijving in vervolgmodules: bezorg een kopie van je deelcertificaten aan eline.deblauwe@groeipunt.be'
+  },
+
+  // ── BOOST JOUW BUSINESS ──────────────────────────────────────
+  {
+    id: 'boost',
+    cat: 'makeup',
+    emoji: '🚀',
+    naam: 'Boost jouw business!',
+    certificaat: 'Deelcertificaat',
+    omschrijving: 'Ondernemersmodule voor wie creatief aan de slag wil met een eigen totaalconcept. Praktijkgericht, met aandacht voor jouw persoonlijke situatie en ambities.',
+    lesdagen: 'Maandagavond',
+    tijdstip: '18u30 – 22u00',
+    duur: '10 weken',
+    afstand: null,
+    prijs_totaal: '€ 90',
+    schoolgeld_totaal: '+ € 25 schoolgeld',
+    startpakket: null,
+    voorkennis: 'Geen',
+    avonden: 1,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Boost jouw business',
+        num: 1,
+        lesdagen: 'Maandagavond – 28 sept 2026 t.e.m. 23 jan 2027',
+        inhoud: [
+          'Werken aan eigen totaalconcept',
+          'Creativiteit, visie en organisatietalent',
+          'Praktijkgerichte opdrachten afgestemd op jouw situatie',
+          'Ondernemerschap in de schoonheidssector'
+        ],
+        prijs: '€ 90',
+        schoolgeld: '€ 25',
+        startpakket: null,
+        voorkennis: 'Geen'
+      }
+    ],
+    tip: 'Maandagavond van 28 september 2026 tot 23 januari 2027. Kan gecombineerd worden met elke andere opleiding – ideaal als aanvulling op je parcours!',
+    extra: null
+  }
+];
+
+// ─────────────────────────────────────────────────────────────
+// KEUZEHULP LOGIC
+// ─────────────────────────────────────────────────────────────
+let khAnswers = { 1: null, 2: null, 3: null };
+
+function toggleKH() {
+  const toggle = document.getElementById('khToggle');
+  const body = document.getElementById('khBody');
+  toggle.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+function selectKH(q, val) {
+  khAnswers[q] = val;
+  document.querySelectorAll(`#kh${q} .kh-chip`).forEach(c => {
+    c.classList.toggle('selected', c.dataset.val === val);
+  });
+  computeKH();
+}
+
+function computeKH() {
+  if (!khAnswers[1]) return;
+  const cat = khAnswers[1];
+  const exp = khAnswers[2];
+  const avn = khAnswers[3];
+
+  let results = [];
+
+  const catMap = {
+    nagels: ['nagelstylist'],
+    voeten: ['voetverzorger', 'gespvoetverzorger'],
+    gelaat: ['schoonheidsspecialist', 'makeup', 'visagie'],
+    massage: ['masseur'],
+    makeup: ['makeup', 'visagie', 'hairstyling', 'boost'],
+    grime: ['basisgrime', 'theatergrime', 'karaktergrime', '3dgrime', 'kindergrime', 'facepainting'],
+    haar: ['kapper-start', 'kapper-vervolg']
+  };
+
+  results = catMap[cat] || [];
+
+  if (exp === 'beginner') {
+    results = results.filter(id => {
+      const opl = OPLEIDINGEN.find(o => o.id === id);
+      return opl && opl.tags.includes('beginner');
+    });
+  } else if (exp === 'pro') {
+    results = results.filter(id => {
+      const opl = OPLEIDINGEN.find(o => o.id === id);
+      return opl && opl.tags.includes('voorkennis');
+    });
+    if (results.length === 0) results = catMap[cat] || [];
+  }
+
+  if (avn === '1') {
+    results = results.filter(id => {
+      const opl = OPLEIDINGEN.find(o => o.id === id);
+      return opl && opl.avonden <= 1;
+    });
+    if (results.length === 0) results = catMap[cat] || [];
+  }
+
+  const tagEls = document.getElementById('khResultTags');
+  tagEls.innerHTML = '';
+
+  const display = results.slice(0, 6);
+  display.forEach(id => {
+    const opl = OPLEIDINGEN.find(o => o.id === id);
+    if (!opl) return;
+    const el = document.createElement('div');
+    el.className = 'kh-result-tag';
+    el.textContent = opl.emoji + ' ' + opl.naam;
+    el.onclick = () => { openModal(id); };
+    tagEls.appendChild(el);
+  });
+
+  const resultEl = document.getElementById('khResult');
+  resultEl.classList.toggle('show', display.length > 0);
+}
+
+function resetKH() {
+  khAnswers = { 1: null, 2: null, 3: null };
+  document.querySelectorAll('.kh-chip').forEach(c => c.classList.remove('selected'));
+  document.getElementById('khResult').classList.remove('show');
+}
+
+// ─────────────────────────────────────────────────────────────
+// CATEGORY FILTER
+// ─────────────────────────────────────────────────────────────
+let activeHighlights = [];
+
+function filterCat(cat) {
+  document.querySelectorAll('.cat-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.cat === cat);
+  });
+  renderCards(cat);
+}
+
+function renderCards(cat) {
+  const grid = document.getElementById('cardsGrid');
+  const empty = document.getElementById('emptyState');
+  const list = cat === 'all' ? OPLEIDINGEN : OPLEIDINGEN.filter(o => o.cat === cat);
+  grid.innerHTML = '';
+  if (list.length === 0) {
+    empty.classList.add('show');
+    return;
+  }
+  empty.classList.remove('show');
+  list.forEach(opl => {
+    grid.appendChild(buildCard(opl));
+  });
+}
+
+function buildCard(opl) {
+  const isHighlighted = activeHighlights.includes(opl.id);
+  const card = document.createElement('div');
+  card.className = 'opl-card' + (isHighlighted ? ' highlighted' : '');
+  card.onclick = () => openModal(opl.id);
+
+  const tagsHtml = opl.tags.map(t => {
+    if (t === 'beginner') return `<span class="tag beginner">✓ Beginners welkom</span>`;
+    if (t === 'voorkennis') return `<span class="tag voorkennis">⭐ Vervolgmodule</span>`;
+    return `<span class="tag">${t}</span>`;
+  }).join('');
+
+  card.innerHTML = `
+    <div class="card-header">
+      <div class="card-emoji">${opl.emoji}</div>
+      <div class="card-title-block">
+        <div class="card-cat">${catLabel(opl.cat)}</div>
+        <div class="card-title">${opl.naam}</div>
+        <div class="card-subtitle">${opl.certificaat}</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="meta-pill teal">📅 ${opl.duur}</div>
+        <div class="meta-pill teal">🕡 ${opl.tijdstip}</div>
+        ${opl.avonden ? `<div class="meta-pill">${opl.avendenLabel || (opl.avonden === 1 ? '1 avond/week' : opl.avonden === 2 ? '2 avonden/week' : '2-3 avonden/week')}</div>` : ''}
+      </div>
+      <div>
+        <div class="card-prijs">${opl.prijs_totaal} <span>${opl.schoolgeld_totaal}</span></div>
+      </div>
+      <div class="card-tags">${tagsHtml}</div>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer-text">${opl.modules.length} module${opl.modules.length > 1 ? 's' : ''}</div>
+      <button class="card-btn">Meer info ›</button>
+    </div>
+  `;
+  return card;
+}
+
+function catLabel(cat) {
+  const map = { nagels: '💅 Nagels', voeten: '🦶 Voeten', gelaat: '✨ Gelaat & Huid', massage: '💆 Massage', makeup: '💄 Make-up & Visagie', grime: '🎭 Grime', haar: '✂️ Haar' };
+  return map[cat] || cat;
+}
+
+// ─────────────────────────────────────────────────────────────
+// MODAL
+// ─────────────────────────────────────────────────────────────
+function openModal(id) {
+  const opl = OPLEIDINGEN.find(o => o.id === id);
+  if (!opl) return;
+
+  document.getElementById('mCat').textContent = catLabel(opl.cat);
+  document.getElementById('mTitle').textContent = opl.emoji + ' ' + opl.naam;
+  document.getElementById('mSubtitle').textContent = opl.certificaat;
+
+  const body = document.getElementById('mBody');
+
+  // Info grid
+  let infoGrid = `
+    <div class="modal-section">
+      <div class="modal-section-title">Praktische info</div>
+      <div class="info-grid">
+        <div class="info-item prijs-item">
+          <div class="info-label">Inschrijvingsgeld</div>
+          <div class="info-value">${opl.prijs_totaal}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Schoolgeld</div>
+          <div class="info-value">${opl.schoolgeld_totaal}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Lesdagen</div>
+          <div class="info-value">${opl.lesdagen}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Tijdstip</div>
+          <div class="info-value">${opl.tijdstip}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Duur</div>
+          <div class="info-value">${opl.duur}</div>
+        </div>
+        ${opl.afstand ? `<div class="info-item"><div class="info-label">Afstandsonderwijs</div><div class="info-value">${opl.afstand}</div></div>` : ''}
+        <div class="info-item">
+          <div class="info-label">Voorkennis vereist</div>
+          <div class="info-value">${opl.voorkennis}</div>
+        </div>
+        ${opl.startpakket ? `<div class="info-item"><div class="info-label">Startpakket</div><div class="info-value">${opl.startpakket}</div></div>` : ''}
+      </div>
+    </div>
+  `;
+
+  // Description
+  let descHtml = `
+    <div class="modal-section">
+      <div class="modal-section-title">Over deze opleiding</div>
+      <p style="font-size:14px;color:#444;line-height:1.7;">${opl.omschrijving}</p>
+    </div>
+  `;
+
+  // Traject (for kapper-vervolg)
+  let trajectHtml = '';
+  if (opl.traject) {
+    trajectHtml = `
+      <div class="modal-section">
+        <div class="modal-section-title">Ideaal leertraject</div>
+        <div class="traject-steps">
+          ${opl.traject.map((s, i) => `
+            <div class="traject-step">
+              <div class="step-dot">${i+1}</div>
+              <div class="step-content">
+                <div class="step-year">${s.jaar}</div>
+                <div class="step-modules">${s.modules}</div>
+                <div class="step-info">${s.info}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // Modules
+  let modulesHtml = `
+    <div class="modal-section">
+      <div class="modal-section-title">Modules & inhoud</div>
+      <div class="modules-list">
+        ${opl.modules.map((m, i) => `
+          <div class="module-item">
+            <div class="module-header" onclick="toggleModule(this)">
+              <div class="module-num">${m.num}</div>
+              <div class="module-name">${m.naam}</div>
+              <div class="module-price">${m.prijs}</div>
+              <div class="module-arrow">▼</div>
+            </div>
+            <div class="module-body ${i === 0 ? 'open' : ''}">
+              <div class="module-inhoud">
+                ${m.inhoud.map(t => `<span class="module-tag">${t}</span>`).join('')}
+              </div>
+              <div class="module-meta">
+                ${m.lesdagen ? `<div class="module-meta-item">📅 Lesdag: <strong>${m.lesdagen}</strong></div>` : ''}
+                <div class="module-meta-item">💶 Inschrijving: <strong>${m.prijs}</strong></div>
+                <div class="module-meta-item">📋 Schoolgeld: <strong>${m.schoolgeld}</strong></div>
+                ${m.startpakket ? `<div class="module-meta-item">🎒 Startpakket: <strong>${m.startpakket}</strong></div>` : ''}
+                <div class="module-meta-item">📚 Voorkennis: <strong>${m.voorkennis}</strong></div>
+                ${m.opmerking ? `<div class="module-meta-item" style="color:#d95e00;font-weight:700;">⚠️ ${m.opmerking}</div>` : ''}
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  // Tip / extra
+  let tipHtml = '';
+  if (opl.tip) tipHtml = `<div class="tip-box"><strong>💡 Tip:</strong> ${opl.tip}</div>`;
+  let extraHtml = '';
+  if (opl.extra) extraHtml = `<div class="info-note">ℹ️ ${opl.extra}</div>`;
+
+  body.innerHTML = descHtml + infoGrid + trajectHtml + modulesHtml + tipHtml + extraHtml;
+
+  // Re-open first module if accordion was reset
+  const firstModule = body.querySelector('.module-body');
+  if (firstModule && !firstModule.classList.contains('open')) {
+    firstModule.classList.add('open');
+    const arr = firstModule.previousElementSibling?.querySelector('.module-arrow');
+    if (arr) arr.classList.add('open');
+  }
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function toggleModule(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.module-arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+// ─────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────
+renderCards('all');
+</script>
+</body>
+</html>
