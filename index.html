@@ -872,6 +872,56 @@ const OPLEIDINGEN = [
   },
 
   // ── GELAAT & HUID ────────────────────────────────────────────
+  {
+    id: 'gelaatsverzorging',
+    cat: 'gelaat',
+    emoji: '🌿',
+    naam: 'Gelaatsverzorging',
+    certificaat: 'Certificaat Gelaatsverzorging',
+    omschrijving: 'Leer professionele gelaatsverzorging van basis tot verdieping: huidanalyse, verzorgingstechnieken en het gebruik van apparaten. Twee modules die elkaar opvolgen op maandagavond.',
+    lesdagen: 'Maandagavond',
+    tijdstip: '18u30 – 22u00',
+    duur: '2 × half semester (modules volgen elkaar op)',
+    afstand: '30% afstandsonderwijs',
+    prijs_totaal: '€ 540',
+    schoolgeld_totaal: '+ schoolgeld per module',
+    startpakket: 'Vrijblijvend per module',
+    voorkennis: 'Geen – start met Gelaatsverzorging 1',
+    avonden: 1,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Gelaatsverzorging 1',
+        num: 1,
+        lesdagen: 'Maandagavond — 1e half semester',
+        inhoud: [
+          'Basistechnieken gelaatsverzorging',
+          'Huidanalyse en producten (introductie)',
+          'Praktische verzorgingstechnieken'
+        ],
+        prijs: '€ 135',
+        schoolgeld: '€ 31',
+        startpakket: 'Vrijblijvend',
+        voorkennis: 'Geen – startmodule'
+      },
+      {
+        naam: 'Gelaatsverzorging 2',
+        num: 2,
+        lesdagen: 'Maandagavond — 2e half semester (volgt op GV1)',
+        inhoud: [
+          'Huidanalyse en afwijkingen',
+          'Huidanalyse en producten (verdieping)',
+          'Apparaten in de gelaatsverzorging'
+        ],
+        prijs: '€ 405',
+        schoolgeld: '€ 83',
+        startpakket: 'Vrijblijvend',
+        voorkennis: 'Geslaagd voor Gelaatsverzorging 1'
+      }
+    ],
+    tip: 'Gelaatsverzorging 1 en 2 volgen elkaar op in hetzelfde schooljaar op maandagavond.',
+    extra: null
+  },
 
   // ── MASSAGE ─────────────────────────────────────────────────
   {
@@ -1503,7 +1553,7 @@ function computeKH() {
   const catMap = {
     nagels: ['nagelstylist'],
     voeten: ['voetverzorger', 'gespvoetverzorger'],
-    gelaat: ['schoonheidsspecialist', 'makeup', 'visagie'],
+    gelaat: ['gelaatsverzorging', 'makeup', 'visagie'],
     massage: ['masseur'],
     makeup: ['makeup', 'visagie', 'hairstyling', 'boost'],
     grime: ['basisgrime', 'theatergrime', 'karaktergrime', '3dgrime', 'kindergrime', 'facepainting'],
