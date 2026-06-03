@@ -786,12 +786,12 @@ const OPLEIDINGEN = [
     id: 'nagelstylist',
     cat: 'nagels',
     emoji: '💅',
-    naam: 'Nagelstylist',
+    naam: 'Nagelstyling',
     certificaat: 'Certificaat Nagelstylist',
     omschrijving: 'Van handverzorging tot gel- en acrylnagels en freestechnieken: een compleet parcours voor wie professioneel met nagels aan de slag wil.',
-    lesdagen: 'Optie 1: Dinsdag + Woensdag (half semester) · Optie 2: Donderdag (1 schooljaar)',
+    lesdagen: 'Optie 1: Dinsdag + Woensdag (1 semester) · Optie 2: Donderdag (1 schooljaar)',
     tijdstip: '18u30 – 22u00',
-    duur: '2 avonden/week – half semester  OF  1 avond/week – volledig schooljaar',
+    duur: '2 avonden/week – 1 semester  OF  1 avond/week – 1 schooljaar',
     afstand: '30% afstandsonderwijs',
     prijs_totaal: '€ 495',
     schoolgeld_totaal: '+ schoolgeld per module',
@@ -832,7 +832,7 @@ const OPLEIDINGEN = [
         voorkennis: 'Nagelstyling 2'
       }
     ],
-    tip: 'Kies zelf je tempo: 2 avonden/week op dinsdag + woensdag (half semester) of 1 avond/week op donderdag (volledig schooljaar). De 3 modules samen = volledige opleiding Nagelstylist voor € 495.',
+    tip: 'Kies zelf je tempo: 2 avonden/week op dinsdag + woensdag (1 semester) of 1 avond/week op donderdag (1 schooljaar). De 3 modules samen = volledige opleiding Nagelstylist voor € 495.',
     extra: null
   },
 
@@ -841,7 +841,7 @@ const OPLEIDINGEN = [
     id: 'voetverzorger',
     cat: 'voeten',
     emoji: '🦶',
-    naam: 'Voetverzorger',
+    naam: 'Voetverzorging',
     certificaat: 'Certificaat Voetverzorger',
     omschrijving: 'Leer manuele en technische voetverzorging, inclusief freestechnieken, verbandtechnieken en wellness voor de voet.',
     lesdagen: 'Dinsdag + Woensdag',
@@ -853,6 +853,7 @@ const OPLEIDINGEN = [
     startpakket: 'Basismateriaal verplicht aan te kopen',
     voorkennis: 'Geen – start met Voetverzorging 1',
     avonden: 2,
+    avendenLabel: '2 avonden · 1 schooljaar',
     tags: ['beginner'],
     modules: [
       {
@@ -890,9 +891,9 @@ const OPLEIDINGEN = [
     omschrijving: 'Leer professionele gelaatsverzorging van basis tot verdieping: huidanalyse, verzorgingstechnieken en het gebruik van apparaten. Twee modules die elkaar opvolgen op maandagavond.',
     lesdagen: 'Maandagavond',
     tijdstip: '18u30 – 22u00',
-    duur: '2 × half semester (modules volgen elkaar op)',
-    afstand: '30% afstandsonderwijs',
-    prijs_totaal: '€ 540',
+    duur: '2 × 1 semester (modules volgen elkaar op)',
+    afstand: '50% afstandsonderwijs',
+    prijs_totaal: '€ 585',
     schoolgeld_totaal: '+ schoolgeld per module',
     startpakket: 'Vrijblijvend per module',
     voorkennis: 'Geen – start met Gelaatsverzorging 1',
@@ -902,13 +903,13 @@ const OPLEIDINGEN = [
       {
         naam: 'Gelaatsverzorging 1',
         num: 1,
-        lesdagen: 'Maandagavond — 1e half semester',
+        lesdagen: 'Maandagavond — 1e semester + 50% afstandsonderwijs',
         inhoud: [
           'Basistechnieken gelaatsverzorging',
           'Huidanalyse en producten (introductie)',
           'Praktische verzorgingstechnieken'
         ],
-        prijs: '€ 135',
+        prijs: '€ 405',
         schoolgeld: '€ 31',
         startpakket: 'Vrijblijvend',
         voorkennis: 'Geen – startmodule'
@@ -916,13 +917,13 @@ const OPLEIDINGEN = [
       {
         naam: 'Gelaatsverzorging 2',
         num: 2,
-        lesdagen: 'Maandagavond — 2e half semester (volgt op GV1)',
+        lesdagen: 'Maandagavond — 2e semester (volgt op GV1)',
         inhoud: [
           'Huidanalyse en afwijkingen',
           'Huidanalyse en producten (verdieping)',
           'Apparaten in de gelaatsverzorging'
         ],
-        prijs: '€ 405',
+        prijs: '€ 180',
         schoolgeld: '€ 83',
         startpakket: 'Vrijblijvend',
         voorkennis: 'Geslaagd voor Gelaatsverzorging 1'
@@ -939,50 +940,41 @@ const OPLEIDINGEN = [
     emoji: '💆',
     naam: 'Masseur',
     certificaat: 'Certificaat Masseur',
-    omschrijving: 'Leer klassieke lichaamsmassage en basis wellnesstechnieken. De theorie volg je volledig via afstandsonderwijs; de praktijk op school.',
-    lesdagen: 'Maandag + Donderdag',
+    omschrijving: 'Leer klassieke lichaamsmassage en gespecialiseerde lichaamsbehandelingen. De theorie volg je volledig via afstandsonderwijs; de praktijk op school.',
+    lesdagen: 'Donderdag / Maandag + Donderdag',
     tijdstip: '18u30 – 22u00',
-    duur: '1 schooljaar',
+    duur: '1 semester per module',
     afstand: 'Theorie volledig via afstandsonderwijs',
-    prijs_totaal: '€ 720',
+    prijs_totaal: '€ 270 / € 360',
     schoolgeld_totaal: '+ schoolgeld',
     startpakket: null,
     voorkennis: 'Geen',
-    avonden: 2,
+    avonden: 1,
+    avendenLabel: '1 of 2 avonden/week',
     tags: ['beginner'],
     modules: [
       {
-        naam: 'Masseur (basis)',
+        naam: 'Masseur',
         num: 1,
-        lesdagen: 'Donderdag (1 avond/week)',
+        lesdagen: 'Donderdag (1 avond/week) – 1 semester',
         inhoud: ['Klassieke lichaamsmassage'],
-        prijs: '€ 360',
+        prijs: '€ 270',
         schoolgeld: '€ 19',
         startpakket: null,
         voorkennis: 'Geen'
       },
       {
-        naam: 'Masseur specialisatie – Wellness',
+        naam: 'Masseur Specialisatie',
         num: 2,
-        lesdagen: 'Maandag + Donderdag (2 avonden/week)',
-        inhoud: ['Wellness behandelingen'],
-        prijs: '€ 90',
-        schoolgeld: '€ 62',
-        startpakket: null,
-        voorkennis: 'Masseur basis'
-      },
-      {
-        naam: 'Masseur specialisatie – Specifieke lichaamsbehandelingen',
-        num: 3,
-        lesdagen: 'Maandag + Donderdag (2 avonden/week)',
-        inhoud: ['Specifieke lichaamsmassage en -behandelingen'],
-        prijs: '€ 270',
+        lesdagen: 'Maandag + Donderdag (2 avonden/week) – 1 semester',
+        inhoud: ['Wellness behandelingen', 'Specifieke lichaamsbehandelingen'],
+        prijs: '€ 360',
         schoolgeld: '€ 27',
         startpakket: null,
-        voorkennis: 'Masseur basis'
+        voorkennis: 'Masseur'
       }
     ],
-    tip: 'Je kan na Masseur basis kiezen welke specialisatie(s) je wil volgen.',
+    tip: 'Je kan na Masseur kiezen of je de specialisatie wil volgen.',
     extra: null
   },
 
@@ -1046,9 +1038,28 @@ const OPLEIDINGEN = [
     tags: ['voorkennis'],
     modules: [
       {
-        naam: 'Visagie – Retro / Experimenteel',
+        naam: 'Make-up',
         num: 1,
-        lesdagen: 'Dinsdagavond',
+        lesdagen: 'Maandag of Woensdag (keuze bij inschrijving) – 1 semester',
+        inhoud: [
+          'Basisopmaak: concealer, foundation, contour & highlight, blush',
+          'Oogopmaak: wenkbrauwen, oogschaduw, eyeliner, mascara',
+          'Mondopmaak',
+          'Make-up voor de rijpere huid',
+          'Correctieve make-up',
+          'Smokey eyes & combinatietechnieken',
+          'Kleurenleer'
+        ],
+        prijs: '€ 225',
+        schoolgeld: '€ 25',
+        startpakket: 'Eigen materiaal',
+        voorkennis: 'Geen – startmodule voor het visagietraject',
+        opmerking: 'Verplichte instapmodule voor Visagie'
+      },
+      {
+        naam: 'Visagie – Retro / Experimenteel',
+        num: 2,
+        lesdagen: 'Dinsdagavond – 1 semester',
         inhoud: ['Retro make-up technieken', 'Experimentele visagie'],
         prijs: '€ 180',
         schoolgeld: 'Zie inschrijving',
@@ -1057,8 +1068,8 @@ const OPLEIDINGEN = [
       },
       {
         naam: 'Visagie – Studio / Catwalk / Editorial',
-        num: 2,
-        lesdagen: 'Dinsdagavond',
+        num: 3,
+        lesdagen: 'Dinsdagavond – 1 semester',
         inhoud: ['Studio make-up', 'Catwalk visagie', 'Editorial make-up'],
         prijs: '€ 180',
         schoolgeld: 'Zie inschrijving',
@@ -1066,7 +1077,7 @@ const OPLEIDINGEN = [
         voorkennis: 'Geslaagd voor Make-up'
       }
     ],
-    tip: 'Je kan de twee modules in om het even welke volgorde volgen, als je Make-up hebt gedaan!',
+    tip: 'Start met Make-up, dan kan je de twee Visagie-modules in om het even welke volgorde volgen!',
     extra: null
   },
 
@@ -1151,14 +1162,14 @@ const OPLEIDINGEN = [
     id: '3dgrime',
     cat: 'grime',
     emoji: '🧪',
-    naam: '3D Grime (Speciale technieken)',
+    naam: '3D Grime / Special FX Atelier',
     certificaat: 'Deelcertificaten Speciale Grimeer­technieken',
-    omschrijving: 'Gevorderde grimeer­technieken: maskers maken, special FX, realistische wonden. Verdeeld in drie ateliers.',
+    omschrijving: 'Gevorderde grimeer­technieken: maskers maken, special FX, realistische wonden. Verdeeld in ateliers.',
     lesdagen: '1 avond/week',
     tijdstip: '18u30 – 22u00',
-    duur: 'Wisselend per module (5–19 weken)',
+    duur: '1 semester / 5 weken',
     afstand: null,
-    prijs_totaal: 'Zie per module',
+    prijs_totaal: '€ 180 / € 45',
     schoolgeld_totaal: '+ schoolgeld',
     startpakket: 'Startpakket €300–€400 (verplicht)',
     voorkennis: 'Basisgrime',
@@ -1168,9 +1179,9 @@ const OPLEIDINGEN = [
       {
         naam: '3D Grime – Maskers',
         num: 1,
-        lesdagen: 'Dinsdagavond – wisselend 5–19 weken',
+        lesdagen: 'Dinsdagavond – 1 semester',
         inhoud: ['Nieuwe mal maken op boetseerwerk', 'Masker met silicone, koud schuim…'],
-        prijs: 'zie inschrijving',
+        prijs: '€ 180',
         schoolgeld: '€ 10',
         startpakket: '€ 300–400 (verplicht)',
         voorkennis: 'Basisgrime'
@@ -1178,9 +1189,9 @@ const OPLEIDINGEN = [
       {
         naam: 'Special FX Atelier – Wonden',
         num: 2,
-        lesdagen: 'Dinsdagavond – wisselend 5–19 weken',
+        lesdagen: 'Dinsdagavond – 5 weken',
         inhoud: ['Realistische wonden', 'Platte mal maken', 'Werken naar thema'],
-        prijs: 'zie inschrijving',
+        prijs: '€ 45',
         schoolgeld: '€ 60',
         startpakket: 'Zie module',
         voorkennis: 'Basisgrime'
@@ -1200,7 +1211,7 @@ const OPLEIDINGEN = [
     omschrijving: 'Leer gezichten schminken voor kinderen: licht en schaduw, kleurovergangen, glitters, vlinders en feeën. Leuk en toegankelijk voor beginners!',
     lesdagen: '1 avond/week',
     tijdstip: '18u30 – 22u00',
-    duur: 'Half semester',
+    duur: '1 half semester',
     afstand: null,
     prijs_totaal: '€ 90',
     schoolgeld_totaal: '+ € 6 schoolgeld',
@@ -1212,7 +1223,7 @@ const OPLEIDINGEN = [
       {
         naam: 'Kindergrime',
         num: 1,
-        lesdagen: 'Donderdagavond – 1e halfjaar',
+        lesdagen: 'Donderdagavond – 1e half semester',
         inhoud: [
           'Licht en schaduw technieken',
           'Kleurenleer & teardrops, tijgerlijnen, one stroke',
@@ -1239,7 +1250,7 @@ const OPLEIDINGEN = [
     omschrijving: 'Van facepainting (halloween, pop-art, fantasy…) tot volledige bodypainting: airbrush, sjablonen en thematisch werken.',
     lesdagen: '1 avond/week',
     tijdstip: '18u30 – 22u00',
-    duur: 'Facepainting: half semester · Bodypainting: 1 schooljaar',
+    duur: 'Facepainting: 1 half semester · Bodypainting: 1 semester',
     afstand: null,
     prijs_totaal: '€ 90 per module',
     schoolgeld_totaal: '+ schoolgeld',
@@ -1268,7 +1279,7 @@ const OPLEIDINGEN = [
       {
         naam: 'Bodypainting',
         num: 2,
-        lesdagen: 'Donderdagavond – volledig schooljaar',
+        lesdagen: 'Donderdagavond – 1 semester',
         inhoud: [
           'Bellypainting & airbrush',
           'Sjablonen & licht en schaduw oefeningen',
@@ -1290,7 +1301,7 @@ const OPLEIDINGEN = [
   {
     id: 'hairstyling',
     cat: 'makeup',
-    emoji: '💍',
+    emoji: '💇‍♀️',
     naam: 'Hairstyling',
     certificaat: 'Deelcertificaat Hairstyling',
     omschrijving: 'Leer professionele opsteekkapsels en gevorderde haarstylingtechnieken.',
@@ -1306,9 +1317,9 @@ const OPLEIDINGEN = [
     tags: ['beginner'],
     modules: [
       {
-        naam: 'Hairstyling 1 – Opsteekkapsels',
+        naam: 'Hairstyling 1',
         num: 1,
-        lesdagen: 'Woensdagavond – 1e half semester',
+        lesdagen: 'Woensdagavond – 1e semester',
         inhoud: [
           'Haar voorbereiden op opsteekkapsel',
           'Basistechnieken: 3-vlecht, 4-vlecht, invlecht, opvlecht',
@@ -1323,9 +1334,9 @@ const OPLEIDINGEN = [
         voorkennis: 'Geen'
       },
       {
-        naam: 'Hairstyling 2 – Gevorderde Opsteekkapsels',
+        naam: 'Hairstyling 2',
         num: 2,
-        lesdagen: 'Woensdagavond – 2e half semester (volgt op HS1)',
+        lesdagen: 'Woensdagavond – 2e semester (volgt op HS1)',
         inhoud: ['Gevorderde opsteekkapseltechnieken'],
         prijs: '€ 180',
         schoolgeld: 'Zie inschrijving',
@@ -1347,7 +1358,7 @@ const OPLEIDINGEN = [
     omschrijving: 'Begin je kapperstraject met de twee startmodules: Tijdelijke Omvormingen & Haarverzorging en Basissnitten. Samen vormen ze een stevig eerste jaar.',
     lesdagen: 'TOM: Dinsdag · Basissnitten: Maandag of Donderdag',
     tijdstip: '18u30 – 22u00',
-    duur: 'TOM: 1 avond/week – half semester · Basissnitten: 1 avond/week – 1 schooljaar',
+    duur: 'TOM: 1 avond/week – 1 semester · Basissnitten: 1 avond/week – 1 schooljaar',
     afstand: '50% afstandsonderwijs voor TOM',
     prijs_totaal: '€ 450 (ipv € 720 bij combinatie!)',
     schoolgeld_totaal: '+ schoolgeld',
@@ -1359,6 +1370,7 @@ const OPLEIDINGEN = [
       {
         naam: 'Tijdelijke Omvormingen & Haarverzorging (TOM)',
         num: 1,
+        lesdagen: 'Dinsdagavond – 1 semester',
         inhoud: [
           'Ontvangst en installeren van klanten',
           'Materiaal en benodigdheden',
@@ -1375,6 +1387,7 @@ const OPLEIDINGEN = [
       {
         naam: 'Basissnitten',
         num: 2,
+        lesdagen: 'Maandag of Donderdag – volledig schooljaar',
         inhoud: [
           'Juist hanteren van kam en schaar',
           'Verdelingen maken i.f.v. de snit',
@@ -1402,7 +1415,7 @@ const OPLEIDINGEN = [
     tijdstip: '18u30 – 22u00',
     duur: '2–3 schooljaren (afhankelijk van tempo)',
     afstand: null,
-    prijs_totaal: 'Zie per module',
+    prijs_totaal: '€ 180 of € 360',
     schoolgeld_totaal: '+ schoolgeld per module',
     startpakket: 'Wisselend per module',
     voorkennis: 'Startmodules Kapper',
@@ -1501,7 +1514,7 @@ const OPLEIDINGEN = [
     omschrijving: 'Ondernemersmodule voor wie creatief aan de slag wil met een eigen totaalconcept. Praktijkgericht, met aandacht voor jouw persoonlijke situatie en ambities.',
     lesdagen: 'Maandagavond',
     tijdstip: '18u30 – 22u00',
-    duur: '10 weken',
+    duur: '10 weken (om de 2 weken)',
     afstand: null,
     prijs_totaal: '€ 90',
     schoolgeld_totaal: '+ € 25 schoolgeld',
