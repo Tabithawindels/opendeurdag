@@ -651,6 +651,27 @@
     top: 0;
   }
 
+  /* inschrijf knoppen */
+  .inschrijf-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .inschrijf-btn {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .inschrijf-btn:hover { background: #b84e00; }
+
   /* empty state */
   .empty-state {
     text-align: center;
@@ -699,6 +720,7 @@
           <button class="kh-chip" onclick="selectKH(1,'makeup')" data-val="makeup">💄 Make-up &amp; Visagie</button>
           <button class="kh-chip" onclick="selectKH(1,'grime')" data-val="grime">🎭 Grime</button>
           <button class="kh-chip" onclick="selectKH(1,'haar')" data-val="haar">✂️ Haar</button>
+          <button class="kh-chip" onclick="selectKH(1,'ontharen')" data-val="ontharen">🪮 Ontharen</button>
         </div>
       </div>
       <div class="kh-step">
@@ -739,6 +761,7 @@
     <button class="cat-tab" onclick="filterCat('makeup')" data-cat="makeup">💄 Make-up &amp; Visagie</button>
     <button class="cat-tab" onclick="filterCat('grime')" data-cat="grime">🎭 Grime</button>
     <button class="cat-tab" onclick="filterCat('haar')" data-cat="haar">✂️ Haar</button>
+    <button class="cat-tab" onclick="filterCat('ontharen')" data-cat="ontharen">🪮 Ontharen</button>
   </div>
 
   <!-- CARDS GRID -->
@@ -807,9 +830,14 @@ const OPLEIDINGEN = [
         lesdagen: 'Di + Wo (2 avonden) of Donderdag (1 avond)',
         inhoud: ['Handverzorging', 'Voorbereidende technieken kunstnagels'],
         prijs: '€ 135',
-        schoolgeld: '€ 18',
+        schoolgeld: '€ 14',
         startpakket: '~€ 100 (vrijblijvend)',
-        voorkennis: 'Geen – dit is de startmodule'
+        voorkennis: 'Geen – dit is de startmodule',
+        inschrijfLinks: [
+          { label: 'Di + Wo — 1e semester', url: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc2MjQ%3D' },
+          { label: 'Di + Wo — 2e semester', url: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc2MzA%3D' },
+          { label: 'Donderdag — volledig schooljaar', url: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc2Mjc%3D' }
+        ]
       },
       {
         naam: 'Nagelstyling 2',
@@ -864,7 +892,8 @@ const OPLEIDINGEN = [
         prijs: '€ 495',
         schoolgeld: '€ 55',
         startpakket: 'Basismateriaal (verplicht)',
-        voorkennis: 'Geen'
+        voorkennis: 'Geen',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc1MDc%3D'
       },
       {
         naam: 'Voetverzorging 2',
@@ -910,9 +939,10 @@ const OPLEIDINGEN = [
           'Praktische verzorgingstechnieken'
         ],
         prijs: '€ 405',
-        schoolgeld: '€ 31',
+        schoolgeld: '€ 52',
         startpakket: 'Vrijblijvend',
-        voorkennis: 'Geen – startmodule'
+        voorkennis: 'Geen – startmodule',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc2MzQ%3D'
       },
       {
         naam: 'Gelaatsverzorging 2',
@@ -961,7 +991,8 @@ const OPLEIDINGEN = [
         prijs: '€ 270',
         schoolgeld: '€ 19',
         startpakket: null,
-        voorkennis: 'Geen'
+        voorkennis: 'Geen',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc2MzU%3D'
       },
       {
         naam: 'Masseur Specialisatie',
@@ -1013,7 +1044,11 @@ const OPLEIDINGEN = [
         prijs: '€ 225',
         schoolgeld: '€ 25',
         startpakket: 'Eigen materiaal',
-        voorkennis: 'Geen'
+        voorkennis: 'Geen',
+        inschrijfLinks: [
+          { label: 'Maandagavond', url: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc0MDE%3D' },
+          { label: 'Woensdagavond', url: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc0MTM%3D' }
+        ]
       }
     ],
     tip: null,
@@ -1054,7 +1089,11 @@ const OPLEIDINGEN = [
         schoolgeld: '€ 25',
         startpakket: 'Eigen materiaal',
         voorkennis: 'Geen – startmodule voor het visagietraject',
-        opmerking: 'Verplichte instapmodule voor Visagie'
+        opmerking: 'Verplichte instapmodule voor Visagie',
+        inschrijfLinks: [
+          { label: 'Maandagavond', url: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc0MDE%3D' },
+          { label: 'Woensdagavond', url: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc0MTM%3D' }
+        ]
       },
       {
         naam: 'Visagie – Retro / Experimenteel',
@@ -1094,7 +1133,7 @@ const OPLEIDINGEN = [
     duur: '1 semester',
     afstand: null,
     prijs_totaal: '€ 135',
-    schoolgeld_totaal: '+ € 22 schoolgeld',
+    schoolgeld_totaal: '+ € 10 schoolgeld',
     startpakket: '~€ 100 basismateriaal',
     voorkennis: 'Geen',
     avonden: 1,
@@ -1112,9 +1151,10 @@ const OPLEIDINGEN = [
           'Wenkbrauwen wegwerken'
         ],
         prijs: '€ 135',
-        schoolgeld: '€ 22',
+        schoolgeld: '€ 10',
         startpakket: '~€ 100',
-        voorkennis: 'Geen – startmodule'
+        voorkennis: 'Geen – startmodule',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc0NzI%3D'
       }
     ],
     tip: null,
@@ -1184,7 +1224,8 @@ const OPLEIDINGEN = [
         prijs: '€ 180',
         schoolgeld: '€ 10',
         startpakket: '€ 300–400 (verplicht)',
-        voorkennis: 'Basisgrime'
+        voorkennis: 'Basisgrime',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc0ODc%3D'
       },
       {
         naam: 'Special FX Atelier – Wonden',
@@ -1194,7 +1235,8 @@ const OPLEIDINGEN = [
         prijs: '€ 45',
         schoolgeld: '€ 60',
         startpakket: 'Zie module',
-        voorkennis: 'Basisgrime'
+        voorkennis: 'Basisgrime',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc1MDQ%3D'
       }
     ],
     tip: null,
@@ -1235,7 +1277,8 @@ const OPLEIDINGEN = [
         prijs: '€ 90',
         schoolgeld: '€ 6',
         startpakket: '~€ 160 facepaint pakket',
-        voorkennis: 'Geen'
+        voorkennis: 'Geen',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc0OTk%3D'
       }
     ],
     tip: null,
@@ -1274,7 +1317,8 @@ const OPLEIDINGEN = [
         prijs: '€ 90',
         schoolgeld: '€ 8',
         startpakket: '~€ 160',
-        voorkennis: 'Geen'
+        voorkennis: 'Geen',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc1MDE%3D'
       },
       {
         naam: 'Bodypainting',
@@ -1320,6 +1364,7 @@ const OPLEIDINGEN = [
         naam: 'Hairstyling 1',
         num: 1,
         lesdagen: 'Woensdagavond – 1e semester',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc0OTU%3D',
         inhoud: [
           'Haar voorbereiden op opsteekkapsel',
           'Basistechnieken: 3-vlecht, 4-vlecht, invlecht, opvlecht',
@@ -1329,7 +1374,7 @@ const OPLEIDINGEN = [
           'Werken naar foto / wens klant'
         ],
         prijs: '€ 180',
-        schoolgeld: '€ 19,50',
+        schoolgeld: '€ 20',
         startpakket: '~€ 20 materiaal',
         voorkennis: 'Geen'
       },
@@ -1371,6 +1416,7 @@ const OPLEIDINGEN = [
         naam: 'Tijdelijke Omvormingen & Haarverzorging (TOM)',
         num: 1,
         lesdagen: 'Dinsdagavond – 1 semester',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTczMTc%3D',
         inhoud: [
           'Ontvangst en installeren van klanten',
           'Materiaal en benodigdheden',
@@ -1388,6 +1434,10 @@ const OPLEIDINGEN = [
         naam: 'Basissnitten',
         num: 2,
         lesdagen: 'Maandag of Donderdag – volledig schooljaar',
+        inschrijfLinks: [
+          { label: 'Maandagavond', url: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc2MjI%3D' },
+          { label: 'Donderdagavond', url: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc2MjM%3D' }
+        ],
         inhoud: [
           'Juist hanteren van kam en schaar',
           'Verdelingen maken i.f.v. de snit',
@@ -1517,7 +1567,7 @@ const OPLEIDINGEN = [
     duur: '10 weken (om de 2 weken)',
     afstand: null,
     prijs_totaal: '€ 90',
-    schoolgeld_totaal: '+ € 25 schoolgeld',
+    schoolgeld_totaal: '+ € 51 schoolgeld',
     startpakket: null,
     voorkennis: 'Geen',
     avonden: 1,
@@ -1534,12 +1584,54 @@ const OPLEIDINGEN = [
           'Ondernemerschap in de schoonheidssector'
         ],
         prijs: '€ 90',
-        schoolgeld: '€ 25',
+        schoolgeld: '€ 51',
         startpakket: null,
-        voorkennis: 'Geen'
+        voorkennis: 'Geen',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc1MDY%3D'
       }
     ],
     tip: 'Maandagavond van 28 september 2026 tot 23 januari 2027. Kan gecombineerd worden met elke andere opleiding – ideaal als aanvulling op je parcours!',
+    extra: null
+  },
+
+  // ── ONTHAREN ─────────────────────────────────────────────────
+  {
+    id: 'ontharen',
+    cat: 'ontharen',
+    emoji: '🪮',
+    naam: 'Ontharingstechnieken',
+    certificaat: 'Deelcertificaat Ontharingstechnieken',
+    omschrijving: 'Leer klassieke ontharingstechnieken met filmhars en striphars. Je werkt op benen, oksels, armen, bikinilijn en rug. Les op maandagavond in Gent (Godshuizenlaan). Opgelet: je werkt op elkaar – je moet bereid zijn om zelf model te zijn!',
+    lesdagen: 'Maandagavond',
+    tijdstip: '18u30 – 22u00',
+    duur: '10 weken',
+    afstand: null,
+    prijs_totaal: '€ 90',
+    schoolgeld_totaal: '+ € 20 lesmateriaal',
+    startpakket: null,
+    voorkennis: 'Geen',
+    avonden: 1,
+    tags: ['beginner'],
+    modules: [
+      {
+        naam: 'Ontharingstechnieken Klassiek',
+        num: 1,
+        lesdagen: 'Maandagavond – 10 weken · Gent, Godshuizenlaan',
+        inhoud: [
+          'Klassieke ontharing met filmhars en striphars',
+          'Benen, oksels, armen, bikinilijn en rug',
+          'Werken op elkaar en op modellen',
+          'Hygiëne en veiligheid bij ontharing'
+        ],
+        prijs: '€ 90',
+        schoolgeld: '€ 20 lesmateriaal',
+        startpakket: null,
+        voorkennis: 'Geen – open voor iedereen',
+        opmerking: 'Je moet bereid zijn om zelf model te zijn!',
+        inschrijfLink: 'https://oip.groeipunt.be/winkelmandje?klassen=OTc2MzM%3D'
+      }
+    ],
+    tip: 'Les in Gent op de Godshuizenlaan. Je werkt op elkaar, dus wees bereid om zelf model te zijn!',
     extra: null
   }
 ];
@@ -1697,7 +1789,7 @@ function buildCard(opl) {
 }
 
 function catLabel(cat) {
-  const map = { nagels: '💅 Nagels', voeten: '🦶 Voeten', gelaat: '✨ Gelaat & Huid', massage: '💆 Massage', makeup: '💄 Make-up & Visagie', grime: '🎭 Grime', haar: '✂️ Haar' };
+  const map = { nagels: '💅 Nagels', voeten: '🦶 Voeten', gelaat: '✨ Gelaat & Huid', massage: '💆 Massage', makeup: '💄 Make-up & Visagie', grime: '🎭 Grime', haar: '✂️ Haar', ontharen: '🪮 Ontharen' };
   return map[cat] || cat;
 }
 
@@ -1804,6 +1896,8 @@ function openModal(id) {
                 <div class="module-meta-item">📚 Voorkennis: <strong>${m.voorkennis}</strong></div>
                 ${m.opmerking ? `<div class="module-meta-item" style="color:#d95e00;font-weight:700;">⚠️ ${m.opmerking}</div>` : ''}
               </div>
+              ${m.inschrijfLinks ? `<div class="inschrijf-btns">${m.inschrijfLinks.map(l => `<a href="${l.url}" target="_blank" class="inschrijf-btn">✏️ Inschrijven – ${l.label}</a>`).join('')}</div>` : ''}
+              ${m.inschrijfLink ? `<div class="inschrijf-btns"><a href="${m.inschrijfLink}" target="_blank" class="inschrijf-btn">✏️ Ik schrijf me in</a></div>` : ''}
             </div>
           </div>
         `).join('')}
